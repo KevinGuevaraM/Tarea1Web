@@ -1,0 +1,19 @@
+{% extends "Informacion/base.html" %}
+
+
+{% block contenido %}
+
+{% comment "" %}
+Quería hacer un form "crispy", pero eso requiere tener algo instalado dentro de la computadora,
+Como no sé si eso va a aplicar en otras computadoras, lo voy a dejar así todo triste.
+{% endcomment %}
+<form action="">
+    {% csrf_token %}
+
+    {{form.as_p}}
+    <button>
+        Enviar Mensaje
+    </button>
+</form>
+
+{% endblock contenido %}

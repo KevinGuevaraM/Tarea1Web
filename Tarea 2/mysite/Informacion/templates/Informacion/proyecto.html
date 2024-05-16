@@ -1,0 +1,12 @@
+{% extends "Informacion/base.html" %}
+
+{% block contenido %}
+
+<h1>{{proyecto.titulo}}</h1>
+<h3>{{proyecto.descripcion}}</h3>
+
+<a href="{% url "Informacion:index" %} ">
+    <button style="padding: 10px 15px;">Atrás</button>
+</a>
+    
+{% endblock contenido %}

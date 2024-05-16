@@ -1,0 +1,33 @@
+{% extends "Informacion/base.html" %}
+
+
+{% block contenido %}
+
+<h1>Wenas!</h1>
+<h2>Soy Kevin Guevara Mojica, tengo un enfoque en ingeniería de software</h2>
+<h3>
+    Soy un estudiante de la Universidad de Costa rica que estudia la carrera "Bachillerato en computación con varios énfasis", decidí especializarme en ingeniería de software gracias al interés que tengo del mismo.
+</h3>
+
+<p style="font-size: 18px; margin: 0px">
+    Nací en Costa Rica, Puntarenas y siempre he tenido mucho interés cuando se trata de computadoras y tecnología en general, esto me llevó a buscar una carrera que estuviese relacionada, así fue como terminé 
+    estudiante en la Universidad de Costa Rica, saliendo de mi Provincia de nacimiento para empezar a estudiar lo que me interesa. <br>
+    Actualmente estoy enfocado en adquirir conocimiento sobre el desarrollo y mantenimiento de aplicaciones y sistemas de software sólidos. Creo que es importante 
+    seguir practicas de desarrollo ágiles para lograr tener un código legible y en la búsqueda continua de mejorar cuando se trata de crear.
+</p>
+
+<h2> Habilidades Técnicas: </h2>
+<ul style="font-size: 18px">
+    <li>Dominio de lenguajes de programación como Java, Python, C++ y C#</li>
+    <li>Experiencia mínima utilizando tecnologías como HTML, CSS y JavaScript</li>
+    <li>Conocimientos básicos en bases de datos SQL</li>
+</ul>
+
+<h2>Proyectos recientes:</h2>
+<ul style="font-size: 18px">
+    {% for proyecto in proyectos %}
+    <li><a href="{% url 'Informacion:proyecto' proyecto.id %}">{{proyecto.titulo}}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock  %}
