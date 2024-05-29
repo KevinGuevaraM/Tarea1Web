@@ -1,0 +1,25 @@
+{% extends "Informacion/base.html" %}
+
+{% block contenido %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/blog.css' %}">
+
+<form action={% url "Informacion:cambioOrden" %} id="ordenForm" method="post" >
+    {% csrf_token %}
+    <select name="orden" id="orden" type="submit" onchange="enviarFormulario">
+        <option value="Relevantes">Relevantes</option>
+        <option value="Recientes">Recientes</option>
+    </select>
+    <select name="cantidad" id="cantidad" type="submit" onchange="enviarFormulario">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
+    <button>Guardar Cambios</button>
+</form>
+{% for articulo in articulos|slice:cantidad %}
+    <li><a href="{% url 'Informacion:articulo' articulo.pk %}">{{articulo.titulo}}</a></li>
+{% endfor %}
+<br>
+
+{% endblock contenido %}

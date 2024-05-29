@@ -7,3 +7,9 @@ class EnviarMensaje(forms.Form):
     nombre = forms.CharField(label="Nombre", max_length=150)
     #Cuerpo
     cuerpo = forms.CharField(widget=forms.Textarea)
+
+class HacerComentario(forms.Form):
+    #nombre
+    nombre = forms.CharField(label="Nombre", max_length=150)
+    #Cuerpo
+    cuerpo = forms.CharField(widget=forms.Textarea)
