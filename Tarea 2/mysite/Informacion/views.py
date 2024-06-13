@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.db.models import F
 from .models import Proyecto, Articulo, Comentario
 from .forms import EnviarMensaje, HacerComentario
 
@@ -63,4 +64,11 @@ def articulo(request, id):
         'articulo' : articulo,
         'form' : HacerComentario(),
         'comentarios' : comentarios,
+        'id' : id,
     })
+
+def aumentarLike(request, id):
+    articulo = get_object_or_404(Articulo, pk=id)
+    articulo.likes = F("likes") + 1
+    articulo.save()
+    return HttpResponseRedirect(reverse("Informacion:articulo", args=(id,)))

@@ -12,4 +12,5 @@ urlpatterns = [
     path("blog", views.blog, name="blog"),
     path("articulo/<int:id>", views.articulo, name="articulo"),
     path("cambioOrden", views.cambioOrden, name="cambioOrden"),
+    path("articulo/<int:id>/like", views.aumentarLike, name="aumentarLike"),
 ]

@@ -10,3 +10,15 @@
 .fecha {
     font-size: 15px;
 }
+
+.likes {
+    display: flex;
+    justify-items: center;
+}
+
+.aumentar-like {
+    height: 40%;
+    width: 10%;
+    margin: auto;
+    margin-left: 1%;
+}
