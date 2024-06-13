@@ -1,0 +1,12 @@
+.comentario {
+    border: 1px solid gray;
+}
+
+.primera-linea {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fecha {
+    font-size: 15px;
+}

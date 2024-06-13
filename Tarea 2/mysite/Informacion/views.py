@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Proyecto, Articulo
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from .models import Proyecto, Articulo, Comentario
 from .forms import EnviarMensaje, HacerComentario
 
 # Create your views here.
@@ -50,10 +52,15 @@ def cambioOrden(request):
 
 def articulo(request, id):
     articulo = get_object_or_404(Articulo, pk=id)
+    if request.method == 'POST' :
+        Comentario.objects.create(autor = request.POST['nombre'], 
+                                contenido = request.POST['cuerpo'], articulo = articulo)
+        return HttpResponseRedirect(reverse("Informacion:articulo", args=(id,)))
+
+    comentarios = articulo.comentario_set.order_by("-fecha_publicacion")
+    
     return render(request, "Informacion/articulo.html", {
         'articulo' : articulo,
         'form' : HacerComentario(),
+        'comentarios' : comentarios,
     })
-
-def hacerComentario(request):
-    return render(request, "Informacion/index.html")
