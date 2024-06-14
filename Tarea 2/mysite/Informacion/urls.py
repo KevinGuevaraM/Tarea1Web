@@ -13,4 +13,5 @@ urlpatterns = [
     path("articulo/<int:id>", views.articulo, name="articulo"),
     path("cambioOrden", views.cambioOrden, name="cambioOrden"),
     path("articulo/<int:id>/like", views.aumentarLike, name="aumentarLike"),
+    path("logout", views.logout_view, name="logout"),
 ]

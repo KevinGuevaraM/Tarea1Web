@@ -9,22 +9,28 @@
 <p>Publicado el: {{articulo.fecha_publicacion}}</p>
 <div class="likes">
     <p>likes: {{articulo.likes}}</p>
+    {% if user.is_authenticated %}
     <form action="{% url "Informacion:aumentarLike" id%}" class="aumentar-like">
         <button>^</button>
     </form>
+    {% endif %}
 </div>
 
 <hr>
+
+{% if user.is_authenticated %}
 <form method="POST">
     <p>¡Comenta sobre este artículo!</p>
     {% csrf_token %}
-    <label>nombre:</label> <br>
-    {{ form.nombre }}
-    <br> <br>
     <label>Cuerpo del comentario</label> <br>
     {{ form.cuerpo }}
+    <input type="hidden" name="autor" value="{{user.get_username}}">
     <button>Enviar</button>
 </form>
+{% else %}
+<p>¡Necesitas iniciar sesión para comentar artículos!</p>
+{% endif %}
+
 
 {% for comentario in comentarios  %}
     <div class="comentario">

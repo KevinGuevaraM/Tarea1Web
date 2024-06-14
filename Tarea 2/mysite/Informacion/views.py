@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db.models import F
+from django.contrib.auth import logout
 from .models import Proyecto, Articulo, Comentario
 from .forms import EnviarMensaje, HacerComentario
 
@@ -54,7 +55,7 @@ def cambioOrden(request):
 def articulo(request, id):
     articulo = get_object_or_404(Articulo, pk=id)
     if request.method == 'POST' :
-        Comentario.objects.create(autor = request.POST['nombre'], 
+        Comentario.objects.create(autor = request.POST['autor'], 
                                 contenido = request.POST['cuerpo'], articulo = articulo)
         return HttpResponseRedirect(reverse("Informacion:articulo", args=(id,)))
 
@@ -68,7 +69,12 @@ def articulo(request, id):
     })
 
 def aumentarLike(request, id):
-    articulo = get_object_or_404(Articulo, pk=id)
-    articulo.likes = F("likes") + 1
-    articulo.save()
+    if (request.user.is_authenticated):
+        articulo = get_object_or_404(Articulo, pk=id)
+        articulo.likes = F("likes") + 1
+        articulo.save()
     return HttpResponseRedirect(reverse("Informacion:articulo", args=(id,)))
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("Informacion:index"))
